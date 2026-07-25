@@ -1,0 +1,284 @@
+aid: rsa-insurance
+name: RSA Insurance
+review:
+  question: Does RSA Insurance publish a public, self-serve developer portal or any downloadable API specification?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: carrier-pc
+  openapiHarvested: false
+  specsCount: 0
+  gated: true
+findings:
+  summary: |
+    RSA Insurance has no public API surface. It is a broker-distributed UK
+    property and casualty carrier, and every machine-readable or transactional
+    surface it operates sits behind a user ID and password issued to
+    registered intermediaries.
+
+    Every first-party developer-portal candidate was probed on 2026-07-25 and
+    none exists. rsagroup.com does not resolve directly and www.rsagroup.com
+    301s to www.rsainsurance.co.uk. On the live host, /developers, /developer,
+    /api, /partners, /integrations, /brokers and /broker all return HTTP 404,
+    as do /openapi.json, /api-docs, /robots.txt, /sitemap.xml and
+    /.well-known/security.txt. developer., developers., docs. and api. under
+    rsainsurance.co.uk resolve to a wildcard address (165.160.13.20 /
+    165.160.15.20) but no TLS service answers on any of them — curl returns
+    connection failure, not a page. There is no marketing "innovation" or
+    "open API" page either; the absence is total rather than a login wall over
+    a documented product.
+
+    The only integration surfaces RSA advertises are on its broker tools page
+    (https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/,
+    HTTP 200), and every one of them is a human login: RSA Connect, the
+    "Connect Intermediary Website" at rsaconnect.rsagroup.co.uk (HTTP 200,
+    UserID + Password form, access granted only by emailing
+    Intermediated.ebusiness@intactinsurance.co.uk with an agency number); RSA
+    Online, the online trading platform for intermediated personal home and
+    commercial products at rsaonline.rsagroup.com (HTTP 200, ASP.NET logon
+    workflow, "available to brokers only"); RSA Claims Online; an eFNOL web
+    form for commercial property claims at commercial-property-claims
+    .rsabroker.com; the MID2 Motor Insurance Database upload portal at
+    services1.rsagroup.co.uk (HTTP 200); the Business and Property Protection
+    Portal hosted by RISCAuthority (HTTP 403 to anonymous probes); and RSAred,
+    whose customer.red.rsagroup.com host is now NXDOMAIN — a dead link on a
+    live page.
+
+    Probing rsaconnect.rsagroup.co.uk for specs returns HTTP 200 on
+    /openapi.json and /.well-known/openid-configuration, but both responses
+    are the string "Security Error!.. Invalid URL or Invalid data" from a
+    catch-all handler, not JSON. No OpenAPI, Swagger, AsyncAPI, GraphQL SDL,
+    .proto, Postman collection or event catalog was found anywhere. Zero specs
+    were harvested and the openapi/ directory was deliberately omitted.
+
+    Real-world system-to-system trading with RSA happens through the UK's
+    intermediated plumbing rather than a carrier API: broker software houses
+    (Acturis, Applied, Open GI, SSP, Bravo Digital Trader) and the Polaris
+    imarket commercial e-trading hub, which lists Intact among its
+    participating insurers and integrates insurers against Polaris Standards.
+    None of that is documented publicly by RSA, and Polaris publishes no
+    OpenAPI either.
+
+    Corporate context matters for anyone re-checking this record: Intact
+    Financial Corporation acquired RSA Insurance Group in 2021, and on
+    6 October 2025 RSA and NIG rebranded to Intact Insurance across the UK,
+    Ireland and Europe. rsainsurance.co.uk is now a shrinking legacy shell —
+    /brokers-and-partners/ itself 404s while its children still resolve, and
+    investors, careers, news, schemes, delegated business and risk consulting
+    have all been redirected to intactinsurance.co.uk. The successor site is
+    no better: intactinsurance.co.uk/developers, /api, /developer, /partners,
+    /openapi.json and /swagger.json all return HTTP 404, and
+    developer.intactinsurance.co.uk and api.intactinsurance.co.uk do not
+    serve. github.com/rsagroup is an unrelated neuroscience project
+    (Representational Similarity Analysis toolbox); github.com/Intact-Insurance
+    exists with zero public repositories.
+  acordPosture: >-
+    No ACORD reference found. No mention of ACORD, AL3, ACORD XML, NGDS or
+    IVANS appears on rsainsurance.co.uk or intactinsurance.co.uk. UK
+    intermediated trading with RSA runs on Polaris Standards via the Polaris
+    imarket hub and broker software houses, which is the UK market's
+    equivalent plumbing rather than ACORD.
+  insuranceVerbs:
+    quote:
+      exposed: false
+      note: Quoting is available to registered brokers inside RSA Online and via software-house / imarket e-trade, never as a documented public API.
+    bind:
+      exposed: false
+      note: Bind happens inside the broker-gated RSA Online trading platform or through software-house integrations; no public endpoint.
+    issue:
+      exposed: false
+      note: Policy issuance and documents are delivered through Documents Online inside RSA Connect; no public endpoint.
+    fnol:
+      exposed: false
+      note: Commercial property eFNOL exists but as an unauthenticated HTML web form at commercial-property-claims.rsabroker.com, not an API. Claims status is behind RSA Claims Online (brokers only).
+  audience: agent-facing / partner-only. No consumer-facing or developer-facing API.
+  authModel:
+    scheme: Username and password to broker web portals
+    note: >-
+      RSA Connect and RSA Online both present classic UserID + Password forms.
+      Access is provisioned manually by emailing an agency number to
+      Intermediated.ebusiness@intactinsurance.co.uk. No API keys, no OAuth2, no
+      mTLS and no SAML metadata are documented publicly.
+      /.well-known/openid-configuration and
+      /.well-known/oauth-authorization-server return 404 on
+      www.rsainsurance.co.uk and www.rsaonline.rsagroup.com; on
+      www.rsaconnect.rsagroup.co.uk they return HTTP 200 with a non-JSON
+      "Security Error!.. Invalid URL or Invalid data" catch-all body.
+  webhooks:
+    documented: false
+    note: No event catalog, webhook documentation or AsyncAPI definition found. Absence is the finding.
+  postman:
+    public: false
+    note: No public Postman workspace or collection found for RSA Insurance.
+  graphql:
+    documented: false
+    note: No /graphql surface found on any RSA host.
+  grpc:
+    documented: false
+    note: No published .proto files found.
+  londonMarket:
+    lloydsParticipation: not found
+    note: >-
+      No evidence found that RSA operates a Lloyd's syndicate or participates
+      in PPL, Whitespace, DDM/DCOM or the Blueprint Two programme. RSA is a
+      company-market carrier; its specialty and wholesale international
+      property lines are written on its own paper. Recorded as "not found"
+      rather than "absent" — the London market's platforms are themselves
+      broker-gated and would not be visible from an anonymous probe.
+  transports:
+  - protocol: HTTPS web portal
+    scheme: https
+    baseURL: https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx
+    documented: true
+    machineReadable: false
+    note: RSA Connect intermediary portal. HTTP 200. Login wall, not a developer portal.
+  - protocol: HTTPS web portal
+    scheme: https
+    baseURL: https://www.rsaonline.rsagroup.com/AWE/Container.aspx
+    documented: true
+    machineReadable: false
+    note: RSA Online broker trading platform. HTTP 200. Login wall.
+  - protocol: HTTPS web form
+    scheme: https
+    baseURL: https://commercial-property-claims.rsabroker.com/rsa_commercial_property/claim/request/
+    documented: true
+    machineReadable: false
+    note: Commercial property eFNOL. Linked from the public tools page; an HTML form, not an API.
+  - protocol: REST
+    scheme: https
+    documented: false
+    note: No public REST API is documented on any RSA host.
+  - protocol: GraphQL
+    documented: false
+  - protocol: WebSocket
+    scheme: wss
+    documented: false
+  - protocol: Polaris imarket / software-house e-trade
+    documented: false
+    note: >-
+      Indirect machine-to-machine trading via Acturis, Applied, Open GI, SSP
+      and Bravo Digital Trader against Polaris Standards. Not documented by RSA
+      and not publicly accessible.
+probes:
+- url: https://www.rsagroup.com/
+  status: 200
+  note: 301 redirect chain to https://www.rsainsurance.co.uk/. rsagroup.com apex does not resolve.
+- url: https://www.rsainsurance.co.uk/
+  status: 200
+  note: Live legacy site. Gatsby 5.16.1. Banner - "RSA is now Intact Insurance in the UK, Ireland, and across Europe."
+- url: https://developer.rsainsurance.co.uk/
+  status: 000
+  note: DNS wildcard resolves (165.160.13.20) but no TLS service answers.
+- url: https://developers.rsainsurance.co.uk/
+  status: 000
+  note: No service.
+- url: https://docs.rsainsurance.co.uk/
+  status: 000
+  note: No service.
+- url: https://api.rsainsurance.co.uk/
+  status: 000
+  note: DNS wildcard resolves but no TLS service answers.
+- url: https://www.rsainsurance.co.uk/developers
+  status: 404
+- url: https://www.rsainsurance.co.uk/developer
+  status: 404
+- url: https://www.rsainsurance.co.uk/api
+  status: 404
+- url: https://www.rsainsurance.co.uk/partners
+  status: 404
+- url: https://www.rsainsurance.co.uk/integrations
+  status: 404
+- url: https://www.rsainsurance.co.uk/brokers
+  status: 404
+- url: https://www.rsainsurance.co.uk/openapi.json
+  status: 404
+- url: https://www.rsainsurance.co.uk/api-docs
+  status: 404
+- url: https://www.rsainsurance.co.uk/robots.txt
+  status: 404
+- url: https://www.rsainsurance.co.uk/sitemap.xml
+  status: 404
+- url: https://www.rsainsurance.co.uk/.well-known/security.txt
+  status: 404
+- url: https://www.rsainsurance.co.uk/.well-known/openid-configuration
+  status: 404
+- url: https://www.rsainsurance.co.uk/brokers-and-partners/
+  status: 404
+  note: Parent path 404s while its children resolve — the site is being decommissioned.
+- url: https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/
+  status: 200
+  note: The real integration index. Lists six broker tools, all password-gated.
+- url: https://www.rsainsurance.co.uk/brokers-and-partners/faqs/
+  status: 200
+  note: Broker FAQ index. The e-Trade System FAQ it once carried now 404s.
+- url: https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx
+  status: 200
+  note: Title now reads "Intact Insurance". UserID + Password login form.
+- url: https://www.rsaconnect.rsagroup.co.uk/openapi.json
+  status: 200
+  note: NOT a spec. Body is "Security Error!.. Invalid URL or Invalid data" from a catch-all handler.
+- url: https://www.rsaconnect.rsagroup.co.uk/.well-known/openid-configuration
+  status: 200
+  note: NOT JSON. Same catch-all "Security Error!.." body.
+- url: https://www.rsaonline.rsagroup.com/AWE/Container.aspx?CurrentWorkflow=Logon&CurrentStep=Login
+  status: 200
+  note: Broker trading platform login.
+- url: https://www.rsaonline.rsagroup.com/openapi.json
+  status: 404
+- url: https://www.services1.rsagroup.co.uk/webappserver/midphase2public/
+  status: 200
+  note: MID2 Motor Insurance Database portal.
+- url: http://rsa.bppp.riscauthority.co.uk/
+  status: 403
+  note: Business and Property Protection Portal, hosted by RISCAuthority. Forbidden to anonymous probe.
+- url: https://customer.red.rsagroup.com/Security/Login
+  status: 000
+  note: NXDOMAIN. The RSAred link on the live tools page is dead.
+- url: https://www.intactinsurance.co.uk/
+  status: 200
+  note: Successor corporate site. 403s to non-browser user agents.
+- url: https://www.intactinsurance.co.uk/developers
+  status: 404
+- url: https://www.intactinsurance.co.uk/api
+  status: 404
+- url: https://www.intactinsurance.co.uk/developer
+  status: 404
+- url: https://www.intactinsurance.co.uk/partners
+  status: 404
+- url: https://www.intactinsurance.co.uk/openapi.json
+  status: 404
+- url: https://www.intactinsurance.co.uk/swagger.json
+  status: 404
+- url: https://developer.intactinsurance.co.uk/
+  status: 000
+- url: https://api.intactinsurance.co.uk/
+  status: 000
+sources:
+- url: https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/
+  type: Documentation
+  note: Enumerates every RSA broker tool — BPPP, commercial property eFNOL, MID2, RSA Claims Online, RSA Online, RSAred. Each states "User ID and password required" and several add "Available to brokers only."
+- url: https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx
+  type: Portal
+  note: "Welcome to the Connect Intermediary Website ... Our online services such as Claims Online, Documents Online and MID Updates are available in this password protected area. If you are an insurance intermediary and require access please email your request to Intermediated.ebusiness@intactinsurance.co.uk, including your Name, contact details, Agency number."
+- url: https://www.intactinsurance.co.uk/faqs/rsa-and-nig-are-now-intact-insurance
+  type: Documentation
+  note: >-
+    Quote — "On 6 October 2025 RSA and NIG have officially rebranded to Intact
+    Insurance across the UK, Ireland, and Europe." Page last updated 24 March
+    2026.
+- url: https://www.polaris.co.uk/products/imarket/
+  type: Documentation
+  note: imarket commercial e-trading hub. Lists Intact among participating insurers alongside Allianz, Arch, AXA, Aviva, NIG, QBE and Zurich, and lists Acturis, Applied, Bravo Digital Trader, Open GI and SSP as connected broker systems. No public developer documentation or OpenAPI.
+- url: https://en.wikipedia.org/wiki/RSA_Insurance_Group
+  type: Reference
+  note: Company history and the 2021 Intact Financial Corporation acquisition.
+actions:
+  openapiPath: null
+  apisYmlUpdated: true
+  apisListed: 0
+  reason: |
+    apis[] is intentionally empty. RSA Insurance documents no public API, so
+    there is nothing honest to list. Recording the absence — a broker-gated UK
+    carrier whose only machine integration path is a software house or the
+    Polaris imarket hub, with no ACORD reference of any kind — is the finding.

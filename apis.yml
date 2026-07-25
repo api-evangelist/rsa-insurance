@@ -1,0 +1,79 @@
+aid: rsa-insurance
+url: https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/apis.yml
+name: RSA Insurance
+kind: company
+description: >-
+  RSA Insurance is a British property and casualty insurer whose lineage runs
+  back to the Sun Fire Office of 1710, making it one of the oldest general
+  insurance brands in the United Kingdom. It writes commercial lines through
+  intermediaries — property, liability, motor fleet, marine, construction,
+  engineering and renewable energy, cyber, professional and financial lines,
+  rail, and accident and health — alongside a residual personal lines book.
+  RSA Insurance Group was acquired by Intact Financial Corporation in 2021, and
+  on 6 October 2025 RSA and NIG formally rebranded to Intact Insurance across
+  the UK, Ireland and Europe; rsainsurance.co.uk now survives as a legacy
+  broker-tools site while corporate, investor, careers and news content has
+  moved to intactinsurance.co.uk. RSA has no public developer portal and
+  publishes no self-serve API. developer., developers., docs. and api.
+  subdomains do not serve (wildcard DNS resolves but no TLS service answers),
+  and /developers, /api, /developer, /partners, /integrations and /brokers all
+  return HTTP 404. Every integration surface is broker-gated behind a user ID
+  and password issued to registered intermediaries: RSA Connect (the "Connect
+  Intermediary Website"), RSA Online for intermediated personal home and
+  commercial trading, RSA Claims Online, an eFNOL commercial property claims
+  form, the MID2 Motor Insurance Database portal, and the RSAred risk
+  management customer portal. Machine-to-machine trading reaches RSA the way it
+  reaches most UK carriers — through broker software houses (Acturis, Applied,
+  Open GI, SSP, Bravo Digital Trader) and the Polaris imarket commercial
+  e-trading hub, which lists Intact among its participating insurers and runs
+  on Polaris Standards rather than an openly documented carrier API. No ACORD,
+  AL3, ACORD XML, NGDS or IVANS reference appears anywhere on RSA's public
+  site, and no Lloyd's PPL, Whitespace or Blueprint Two participation was
+  found. This is a partner-gated carrier with no public API surface.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- United Kingdom
+- Property and Casualty
+- Commercial Lines
+- Carrier
+- Broker
+- Claims
+- Underwriting
+- Partner Gated
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://www.rsainsurance.co.uk/
+- type: Website
+  url: https://www.intactinsurance.co.uk/
+- type: Documentation
+  url: https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/
+  name: Tools and resources (broker tools index)
+- type: Documentation
+  url: https://www.rsainsurance.co.uk/brokers-and-partners/faqs/
+  name: Broker frequently asked questions
+- type: Portal
+  url: https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx
+  name: RSA Connect intermediary portal (login required)
+- type: Portal
+  url: https://www.rsaonline.rsagroup.com/AWE/Container.aspx?CurrentWorkflow=Logon&CurrentStep=Login
+  name: RSA Online broker trading platform (login required)
+- type: Portal
+  url: https://www.services1.rsagroup.co.uk/webappserver/midphase2public/
+  name: MID2 Motor Insurance Database portal
+- type: Support
+  url: https://www.rsainsurance.co.uk/contact/broker-support/
+  name: Broker support
+- type: LinkedIn
+  url: https://www.linkedin.com/company/rsa
+- type: X
+  url: https://x.com/rsagroup
+- type: YouTube
+  url: https://www.youtube.com/rsainsurance
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
