@@ -46,6 +46,8 @@ modified: '2026-07-25'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/rsa-insurance-domain-security.yml
 - type: Website
   url: https://www.rsainsurance.co.uk/
 - type: Website
@@ -65,9 +67,41 @@ common:
 - type: Portal
   url: https://www.services1.rsagroup.co.uk/webappserver/midphase2public/
   name: MID2 Motor Insurance Database portal
+- type: Portal
+  url: https://www.connect.intactinsurance.co.uk/
+  name: Connect intermediary portal (successor host for RSA Connect, login required)
 - type: Support
   url: https://www.rsainsurance.co.uk/contact/broker-support/
   name: Broker support
+- type: Support
+  url: https://www.intactinsurance.co.uk/contact-us
+  name: Contact Intact Insurance UK
+- type: Blog
+  url: https://www.intactinsurance.co.uk/news
+  name: News and insights
+- type: PrivacyPolicy
+  url: https://www.rsainsurance.co.uk/privacy-notice/
+  name: Privacy notice
+- type: TermsOfService
+  url: https://www.rsainsurance.co.uk/terms-conditions/
+  name: Terms and conditions
+- type: Compliance
+  url: https://www.rsainsurance.co.uk/regulation/
+  name: >-
+    Regulation — PRA authorised, FCA and PRA regulated, Financial Services
+    Register No. 202323
+- type: Authentication
+  url: authentication/rsa-insurance-authentication.yml
+  name: Access model — human-provisioned broker portal logins, no API authentication
+- type: Conformance
+  url: conformance/rsa-insurance-conformance.yml
+  name: Standards and regulatory conformance posture
+- type: Lifecycle
+  url: lifecycle/rsa-insurance-lifecycle.yml
+  name: Brand and estate lifecycle (RSA to Intact Insurance)
+- type: LLMsTxt
+  url: llms/rsa-insurance-llms.txt
+  name: Agent-facing summary of RSA's (absent) API surface
 - type: LinkedIn
   url: https://www.linkedin.com/company/rsa
 - type: X

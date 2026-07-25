@@ -1,0 +1,153 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of every RSA / Intact Insurance UK host in apis.yml
+summary: >-
+  No /.well-known/ document is served by RSA Insurance on any host. The legacy
+  brand site, the successor Intact Insurance UK site and the RSA Online broker
+  trading platform all return HTTP 404 for every discovery path probed. The RSA
+  Connect intermediary portal answers HTTP 200 to every path, but that is a
+  catch-all: www.rsaconnect.rsagroup.co.uk now 302s to
+  www.connect.intactinsurance.co.uk, whose ASP.NET front controller rewrites any
+  unknown path to /ErrorPage.aspx with the plain-text body
+  "Security Error!.. Invalid URL or Invalid data". None of those 200s is a
+  document. No security.txt, no OIDC or OAuth authorization-server metadata, no
+  api-catalog, no ai-plugin.json and no llms.txt exist anywhere.
+  Recording the absence is the finding; no raw files were saved because nothing
+  was served.
+files_saved: []
+pointer_wired: false
+pointer_note: >-
+  Deliberately NOT wired as `type: WellKnown` in apis.yml. This is a record of
+  absence, and a WellKnown pointer would falsely assert that RSA serves a
+  well-known discovery catalog. Kept in the repository so a later round does not
+  have to re-probe.
+hosts:
+- host: https://www.rsainsurance.co.uk
+  role: legacy RSA brand site (Gatsby)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+  - path: /sitemap.xml
+    status: 404
+  - path: /sitemap-index.xml
+    status: 200
+    note: XML sitemap index only. No robots.txt points at it; not a discovery document.
+- host: https://www.intactinsurance.co.uk
+  role: successor Intact Insurance UK corporate site
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: >-
+      "User-Agent: * / Disallow: /api/ / Disallow: /*?product=* / Host:
+      https://www.intactinsurance.co.uk / Sitemap:
+      https://www.intactinsurance.co.uk/sitemap.xml". The /api/ disallow is a
+      site-internal route, not a public API — https://www.intactinsurance.co.uk/api/
+      returns HTTP 404 to anonymous requests.
+  - path: /sitemap.xml
+    status: 200
+    note: 295 URLs. Product, news, careers and legal pages only — no developer or API path.
+  - path: /api/
+    status: 404
+- host: https://www.rsaconnect.rsagroup.co.uk
+  role: RSA Connect intermediary portal (legacy hostname)
+  redirects_to: https://www.connect.intactinsurance.co.uk
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: Not a document. 302 to www.connect.intactinsurance.co.uk, then /ErrorPage.aspx.
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: Not a document. Same catch-all.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: Not a document. Same catch-all.
+  - path: /.well-known/api-catalog
+    status: 200
+    note: Not a document. Same catch-all.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: Not a document. Same catch-all.
+  - path: /llms.txt
+    status: 200
+    note: Not a document. Same catch-all.
+  - path: /robots.txt
+    status: 200
+    note: >-
+      A real robots.txt, served from www.connect.intactinsurance.co.uk. Disallows
+      five marine contact/claims .aspx pages only.
+- host: https://www.connect.intactinsurance.co.uk
+  role: successor host for the RSA Connect intermediary portal (new in this round)
+  documents:
+  - path: /
+    status: 200
+    note: ASP.NET login page with a password-reset control. Broker login wall.
+  - path: /.well-known/security.txt
+    status: 200
+    note: 'Rewritten to /ErrorPage.aspx. Body: "Security Error!.. Invalid URL or Invalid data".'
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: Rewritten to /ErrorPage.aspx. Not JSON.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: Rewritten to /ErrorPage.aspx. Not JSON.
+  - path: /.well-known/api-catalog
+    status: 200
+    note: Rewritten to /ErrorPage.aspx. Not JSON.
+  - path: /openapi.json
+    status: 200
+    note: Rewritten to /ErrorPage.aspx. NOT an OpenAPI document.
+  - path: /swagger.json
+    status: 200
+    note: Rewritten to /ErrorPage.aspx. NOT a Swagger document.
+  - path: /api-docs
+    status: 200
+    note: Rewritten to /ErrorPage.aspx.
+  - path: /llms.txt
+    status: 200
+    note: Rewritten to /ErrorPage.aspx.
+  - path: /robots.txt
+    status: 200
+- host: https://www.rsaonline.rsagroup.com
+  role: RSA Online broker trading platform
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /sitemap.xml
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: Disallows /AWE/Container.aspx? and the ASP.NET .axd resource handlers.

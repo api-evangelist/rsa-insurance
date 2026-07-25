@@ -1,0 +1,75 @@
+generated: '2026-07-25'
+method: searched
+source: https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/
+docs: https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx
+summary:
+  types: []
+  api_authentication: none
+  api_key_in: []
+  oauth2_flows: []
+  human_provisioned: true
+  note: >-
+    RSA Insurance exposes no API and therefore no API authentication. Every
+    scheme below is a human web-portal login, documented on RSA's public broker
+    tools page. There are no API keys, no OAuth 2.0, no OpenID Connect, no mTLS
+    and no published SAML metadata. This artifact records the access model the
+    provider actually publishes so an integrator knows the real onboarding
+    path — email a human — rather than hunting for credentials that do not exist.
+schemes:
+- name: rsa-connect-portal-login
+  type: portal-login
+  mechanism: User ID + password (HTML form)
+  surface: https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx
+  current_host: https://www.connect.intactinsurance.co.uk/
+  audience: registered insurance intermediaries
+  provisioning:
+    method: manual, by email
+    contact: Intermediated.ebusiness@intactinsurance.co.uk
+    required: [name, contact details, agency number]
+    quote: >-
+      "Welcome to the Connect Intermediary Website ... Our online services such
+      as Claims Online, Documents Online and MID Updates are available in this
+      password protected area. If you are an insurance intermediary and require
+      access please email your request to
+      Intermediated.ebusiness@intactinsurance.co.uk, including your Name,
+      contact details, Agency number."
+  covers: [Claims Online, Documents Online, MID Updates]
+- name: rsa-online-trading-login
+  type: portal-login
+  mechanism: User ID + password (ASP.NET logon workflow)
+  surface: https://www.rsaonline.rsagroup.com/AWE/Container.aspx?CurrentWorkflow=Logon&CurrentStep=Login
+  audience: brokers only
+  covers: [intermediated personal home, commercial trading]
+- name: mid2-portal-login
+  type: portal-login
+  mechanism: User ID + password
+  surface: https://www.services1.rsagroup.co.uk/webappserver/midphase2public/
+  audience: registered intermediaries
+  covers: [Motor Insurance Database vehicle uploads and changes]
+- name: commercial-property-efnol
+  type: anonymous-web-form
+  mechanism: none — unauthenticated public HTML form
+  surface: https://commercial-property-claims.rsabroker.com/rsa_commercial_property/claim/request/
+  covers: [commercial property first notification of loss]
+negative_findings:
+- probe: /.well-known/openid-configuration
+  hosts: [www.rsainsurance.co.uk, www.intactinsurance.co.uk, www.rsaonline.rsagroup.com]
+  status: 404
+- probe: /.well-known/oauth-authorization-server
+  hosts: [www.rsainsurance.co.uk, www.intactinsurance.co.uk, www.rsaonline.rsagroup.com]
+  status: 404
+- probe: /.well-known/openid-configuration
+  hosts: [www.connect.intactinsurance.co.uk, www.rsaconnect.rsagroup.co.uk]
+  status: 200
+  note: >-
+    Not OIDC metadata. The ASP.NET front controller rewrites every unknown path
+    to /ErrorPage.aspx with the plain-text body "Security Error!.. Invalid URL
+    or Invalid data".
+- probe: SAML metadata
+  result: none published
+- probe: machine-to-machine credentials
+  result: >-
+    None documented. System-to-system trading with RSA runs through broker
+    software houses (Acturis, Applied, Open GI, SSP, Bravo Digital Trader) and
+    the Polaris imarket hub, whose credentials are issued by those parties, not
+    by RSA.

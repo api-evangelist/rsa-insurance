@@ -254,6 +254,77 @@ probes:
   status: 000
 - url: https://api.intactinsurance.co.uk/
   status: 000
+- url: https://www.connect.intactinsurance.co.uk/
+  status: 200
+  note: >-
+    New in the 2026-07-25 enrichment round. www.rsaconnect.rsagroup.co.uk now
+    302s here — the RSA Connect intermediary portal has moved to the Intact
+    hostname while the link on RSA's public tools page still points at the old
+    one. ASP.NET login page with a password-reset control.
+- url: https://www.connect.intactinsurance.co.uk/openapi.json
+  status: 200
+  note: NOT a spec. Rewritten to /ErrorPage.aspx, body "Security Error!.. Invalid URL or Invalid data".
+- url: https://www.connect.intactinsurance.co.uk/swagger.json
+  status: 200
+  note: NOT a spec. Same catch-all.
+- url: https://www.connect.intactinsurance.co.uk/.well-known/security.txt
+  status: 200
+  note: NOT a document. Same catch-all.
+- url: https://www.connect.intactinsurance.co.uk/robots.txt
+  status: 200
+  note: A real robots.txt. Disallows five marine contact/claims .aspx pages only.
+- url: https://www.intactinsurance.co.uk/robots.txt
+  status: 200
+  note: 'Disallows /api/ and /*?product=*. The /api/ route is site-internal — /api/ itself returns 404 anonymously.'
+- url: https://www.intactinsurance.co.uk/sitemap.xml
+  status: 200
+  note: 295 URLs. Product, news, careers and legal pages only. No developer or API path.
+- url: https://www.intactinsurance.co.uk/api/
+  status: 404
+- url: https://www.rsaonline.rsagroup.com/robots.txt
+  status: 200
+  note: Disallows /AWE/Container.aspx? and the ASP.NET .axd handlers.
+- url: https://www.rsainsurance.co.uk/sitemap-index.xml
+  status: 200
+- url: https://www.rsainsurance.co.uk/regulation/
+  status: 200
+  note: >-
+    "Intact Insurance UK Limited (No. 00093792) ... Authorised by the Prudential
+    Regulation Authority and regulated by the Financial Conduct Authority and
+    the Prudential Regulation Authority (Financial Services Register No. 202323)."
+- url: https://www.rsainsurance.co.uk/privacy-notice/
+  status: 200
+- url: https://www.rsainsurance.co.uk/terms-conditions/
+  status: 200
+- url: https://www.rsainsurance.co.uk/cookies-policy/
+  status: 200
+- url: https://www.rsainsurance.co.uk/employers-liability-register/
+  status: 200
+- url: https://www.rsainsurance.co.uk/elto/
+  status: 200
+- url: https://status.rsainsurance.co.uk/
+  status: 000
+  note: No status page.
+- url: https://trust.intactinsurance.co.uk/
+  status: 000
+  note: No trust centre.
+- url: https://www.intactfc.com/.well-known/security.txt
+  status: 404
+  note: Parent company Intact Financial Corporation publishes no security.txt either.
+- url: https://www.intact.ca/.well-known/security.txt
+  status: 404
+- url: https://www.intactinsurance.co.uk/news/rss
+  status: 404
+  note: No news feed. /rss.xml and /feed also 404.
+- url: https://api.github.com/orgs/rsagroup
+  status: 200
+  note: >-
+    3 public repositories, unrelated — the Representational Similarity Analysis
+    neuroscience toolbox. Not RSA Insurance. github.com/Intact-Insurance exists
+    with 0 public repositories. No GitHubOrganization pointer is wired.
+- url: https://pypi.org/pypi/rsa-insurance/json
+  status: 404
+  note: No first-party packages on npm, PyPI, or any other registry. "rsa" on npm returns cryptography libraries, a homonym trap.
 sources:
 - url: https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/
   type: Documentation

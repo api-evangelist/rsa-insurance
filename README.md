@@ -53,6 +53,25 @@ Through the UK's intermediated plumbing, not a carrier API. Broker software hous
 
 No evidence was found that RSA operates a Lloyd's syndicate or participates in PPL, Whitespace, DDM/DCOM or the Blueprint Two programme. RSA is a company-market carrier writing on its own paper. Recorded as *not found* rather than *absent* — the London market's platforms are themselves broker-gated and would not be visible from an anonymous probe.
 
+## Artifacts
+
+The 2026-07-25 enrichment round re-probed every host and produced the record below. Most of it is a record of *absence* — which for a partner-gated carrier is the finding, not a gap.
+
+| Artifact | What it holds |
+| --- | --- |
+| [authentication/rsa-insurance-authentication.yml](authentication/rsa-insurance-authentication.yml) | The published access model: four human web-portal logins, provisioned by emailing an agency number. No API keys, no OAuth, no OIDC, no mTLS, no SAML metadata. |
+| [conformance/rsa-insurance-conformance.yml](conformance/rsa-insurance-conformance.yml) | Standards posture — ACORD absent, Polaris Standards *unknown* (participation implied, never stated), MID2 and ELTO genuinely conformed — plus the PRA/FCA authorisation, Solvency II SFCR, Modern Slavery and UK GDPR disclosures. No SOC 2 / ISO 27001 / PCI DSS. |
+| [lifecycle/rsa-insurance-lifecycle.yml](lifecycle/rsa-insurance-lifecycle.yml) | No API versioning, deprecation policy, SLA or status page. Records the 6 October 2025 RSA-to-Intact rebrand and the host-by-host migration of the estate. |
+| [security/rsa-insurance-domain-security.yml](security/rsa-insurance-domain-security.yml) | Probed TLS/HSTS/DNSSEC/CAA/SPF/DMARC. All three live hosts are HTTPS with HSTS; no DNSSEC and no CAA on either domain; `rsainsurance.co.uk` DMARC is `p=none` while `intactinsurance.co.uk` is `p=reject`. |
+| [well-known/rsa-insurance-well-known.yml](well-known/rsa-insurance-well-known.yml) | Every `/.well-known/` probe on every host. Nothing is served. Deliberately *not* wired as a `WellKnown` pointer — it is a negative record. |
+| [llms/rsa-insurance-llms.txt](llms/rsa-insurance-llms.txt) | Agent-facing summary telling a machine, in plain terms, that there is no API here and where the real integration seam is. |
+
+No `openapi/`, `asyncapi/`, `mcp/`, `skills/`, `packages/`, `scopes/`, `errors/`, `sandbox/`, `cli/`, `changelog/` or `components/` directory exists, because there is nothing real to put in one. No first-party package exists on npm, PyPI or any other registry, and `github.com/rsagroup` is an unrelated neuroscience toolbox.
+
+### Host change found this round
+
+`www.rsaconnect.rsagroup.co.uk` now **302s to `www.connect.intactinsurance.co.uk`** — the RSA Connect intermediary portal has moved to the Intact hostname while the link on RSA's own public tools page still points at the old one. Both hosts answer HTTP 200 to *every* path, including `/openapi.json`, `/swagger.json` and `/.well-known/openid-configuration`; every one of those responses is an ASP.NET rewrite to `/ErrorPage.aspx` with the body `Security Error!.. Invalid URL or Invalid data`. They are not documents, and any future round should not mistake those 200s for a spec.
+
 ## Review
 
 The full reviewer finding, including every probe URL with its HTTP status, is in [review.yml](review.yml).

@@ -1,0 +1,78 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  https://www.intactinsurance.co.uk/faqs/rsa-and-nig-are-now-intact-insurance,
+  https://www.rsainsurance.co.uk/, live host probes
+summary: >-
+  There is no API lifecycle to record — RSA Insurance publishes no API, so no
+  versioning scheme, no deprecation policy, no SLA and no status page exist.
+  What does exist, and what any consumer of this record needs, is a brand and
+  estate lifecycle: RSA is being retired in favour of Intact Insurance, and the
+  hosts in this repository are moving underneath integrators one at a time.
+versioning:
+  scheme: none
+  current: null
+  docs: null
+  note: No API, therefore no API versioning.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No API deprecation policy and no RFC 8594 Sunset/Deprecation header support.
+    The brand migration notice below is a corporate rebrand announcement, not an
+    API deprecation policy, and is deliberately not wired as one.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_note: >-
+  No status page. status.rsainsurance.co.uk and trust.intactinsurance.co.uk do
+  not resolve. Broker platform availability is communicated through the portals
+  and broker support, not publicly.
+brand_migration:
+  event: RSA and NIG rebranded to Intact Insurance
+  date: '2025-10-06'
+  scope: United Kingdom, Ireland and Europe
+  quote: >-
+    "On 6 October 2025 RSA and NIG have officially rebranded to Intact Insurance
+    across the UK, Ireland, and Europe."
+  source: https://www.intactinsurance.co.uk/faqs/rsa-and-nig-are-now-intact-insurance
+  page_last_updated: '2026-03-24'
+  parent: Intact Financial Corporation (acquired RSA Insurance Group in 2021)
+estate_changes:
+- host: www.rsagroup.com
+  state: redirecting
+  detail: 301 chain to https://www.rsainsurance.co.uk/. The rsagroup.com apex does not resolve.
+- host: www.rsainsurance.co.uk
+  state: legacy, shrinking
+  detail: >-
+    Live but decommissioning in place. /brokers-and-partners/ itself now returns
+    404 while its children (/tools-resources/, /faqs/) still resolve. Investors,
+    careers, news, schemes, delegated business and risk consulting have all been
+    redirected to intactinsurance.co.uk. TLS certificate expires 2027-01-07.
+- host: www.rsaconnect.rsagroup.co.uk
+  state: redirecting
+  detail: >-
+    New in this round — now 302s to https://www.connect.intactinsurance.co.uk.
+    The RSA Connect intermediary portal has moved to the Intact hostname while
+    the RSA link on the public tools page still points at the old one.
+- host: www.connect.intactinsurance.co.uk
+  state: current
+  detail: Successor host for the RSA Connect intermediary portal. Broker login wall.
+- host: customer.red.rsagroup.com
+  state: dead
+  detail: >-
+    NXDOMAIN. The RSAred risk management portal link on the live broker tools
+    page is broken — an already-completed retirement that was never announced.
+- host: www.intactinsurance.co.uk
+  state: current
+  detail: >-
+    Successor corporate site. 295 URLs in its sitemap, none of them a developer
+    or API path. TLS certificate expires 2026-10-05.
+deprecated_operations: []
+changelog:
+  url: null
+  note: >-
+    No dated API changelog. Product and corporate updates are published as news
+    articles at https://www.intactinsurance.co.uk/news with no feed
+    (/news/rss, /rss.xml and /feed all return 404).

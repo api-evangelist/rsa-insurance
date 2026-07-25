@@ -1,0 +1,61 @@
+# RSA Insurance
+
+> RSA Insurance is a British property and casualty insurer descended from the Sun Fire Office of 1710. It writes commercial lines through intermediaries — property, liability, motor fleet, marine, construction, engineering and renewable energy, cyber, professional and financial lines, rail, and accident and health — alongside a residual personal lines book. RSA Insurance Group was acquired by Intact Financial Corporation in 2021, and on 6 October 2025 RSA and NIG rebranded to Intact Insurance across the UK, Ireland and Europe.
+
+## Agent guidance — there is no API here
+
+RSA Insurance publishes **no public, self-serve API** and operates **no developer portal**. Every probe on 2026-07-25 confirmed this:
+
+- `/developers`, `/developer`, `/api`, `/partners`, `/integrations` and `/brokers` return HTTP 404 on `www.rsainsurance.co.uk`, and the same paths return 404 on the successor site `www.intactinsurance.co.uk`.
+- `developer.`, `developers.`, `docs.` and `api.` under `rsainsurance.co.uk` resolve to a wildcard address but no TLS service answers; the same subdomains under `intactinsurance.co.uk` do not serve.
+- No OpenAPI, Swagger, AsyncAPI, GraphQL SDL, `.proto`, public Postman collection or event catalog exists on any RSA or Intact Insurance UK host.
+- No `/.well-known/` document is served anywhere. `www.connect.intactinsurance.co.uk` (and its legacy alias `www.rsaconnect.rsagroup.co.uk`) answers HTTP 200 to *every* path, but that is an ASP.NET catch-all that rewrites to `/ErrorPage.aspx` with the body `Security Error!.. Invalid URL or Invalid data` — not a document, and specifically **not** an OpenAPI or OIDC discovery response.
+
+Do not attempt to construct an integration against RSA from these hosts. Every transactional surface is behind a broker login, and access is provisioned by a human.
+
+## How machines actually reach RSA
+
+Through the UK's intermediated plumbing, not a carrier API:
+
+- Broker software houses — Acturis, Applied, Open GI, SSP, Bravo Digital Trader.
+- The Polaris **imarket** commercial e-trading hub, which lists Intact among its participating insurers and integrates carriers against **Polaris Standards**. Polaris publishes no OpenAPI either.
+- No ACORD, AL3, ACORD XML, NGDS or IVANS reference appears anywhere on RSA's or Intact Insurance UK's public site. In the UK, Polaris Standards occupy the seam ACORD occupies in North America.
+- No evidence of Lloyd's syndicate participation, PPL, Whitespace, DDM/DCOM or Blueprint Two was found.
+
+## Broker tools (all login-gated)
+
+- [RSA Connect intermediary portal](https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx): Claims Online, Documents Online, MID Updates. User ID + password. Now redirects to `www.connect.intactinsurance.co.uk`.
+- [RSA Connect (successor host)](https://www.connect.intactinsurance.co.uk/): the same portal under the Intact Insurance brand.
+- [RSA Online](https://www.rsaonline.rsagroup.com/AWE/Container.aspx?CurrentWorkflow=Logon&CurrentStep=Login): online trading platform for intermediated personal home and commercial products. Brokers only.
+- [MID2 Motor Insurance Database portal](https://www.services1.rsagroup.co.uk/webappserver/midphase2public/): upload or change vehicle details. User ID + password.
+- Commercial property eFNOL: a public HTML web form, not an API.
+
+## Public pages
+
+- [RSA Insurance (legacy brand site)](https://www.rsainsurance.co.uk/)
+- [Intact Insurance UK (successor site)](https://www.intactinsurance.co.uk/)
+- [RSA and NIG are now Intact Insurance — FAQ](https://www.intactinsurance.co.uk/faqs/rsa-and-nig-are-now-intact-insurance)
+- [Broker tools and resources](https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/)
+- [Broker FAQs](https://www.rsainsurance.co.uk/brokers-and-partners/faqs/)
+- [Broker support](https://www.rsainsurance.co.uk/contact/broker-support/)
+- [News and insights](https://www.intactinsurance.co.uk/news)
+- [Document library](https://www.intactinsurance.co.uk/document-library)
+- [Regulation](https://www.rsainsurance.co.uk/regulation/): Intact Insurance UK Limited (No. 00093792), authorised by the Prudential Regulation Authority and regulated by the FCA and PRA, Financial Services Register No. 202323.
+- [Privacy notice](https://www.rsainsurance.co.uk/privacy-notice/)
+- [Terms and conditions](https://www.rsainsurance.co.uk/terms-conditions/)
+- [Employers' Liability Register](https://www.rsainsurance.co.uk/employers-liability-register/)
+
+## API Evangelist artifacts in this repository
+
+- [apis.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/apis.yml) — the APIs.json index for this provider.
+- [review.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/review.yml) — every probe URL with its HTTP status.
+- [well-known/rsa-insurance-well-known.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/well-known/rsa-insurance-well-known.yml) — the negative `/.well-known/` record.
+- [authentication/rsa-insurance-authentication.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/authentication/rsa-insurance-authentication.yml) — the published access model (human provisioning).
+- [conformance/rsa-insurance-conformance.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/conformance/rsa-insurance-conformance.yml) — standards posture, including the ACORD and Polaris findings.
+- [lifecycle/rsa-insurance-lifecycle.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/lifecycle/rsa-insurance-lifecycle.yml) — the RSA-to-Intact brand sunset and the legacy site's decommissioning.
+- [security/rsa-insurance-domain-security.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/security/rsa-insurance-domain-security.yml) — TLS, HSTS, DNSSEC, CAA, SPF and DMARC probe results.
+
+---
+generated: 2026-07-25
+method: generated
+source: apis.yml + review.yml + live probes (no /llms.txt is published on any RSA or Intact Insurance UK host)
