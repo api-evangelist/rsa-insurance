@@ -1,5 +1,8 @@
 aid: rsa-insurance
 url: https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/apis.yml
+x-api-posture: docs-gated
+x-api-posture-basis: observed
+x-api-posture-note: "This is a partner-gated carrier with no public API surface."
 name: RSA Insurance
 kind: company
 description: >-
