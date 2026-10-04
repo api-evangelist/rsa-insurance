@@ -64,7 +64,6 @@ tags:
 - Property and Casualty
 - Commercial Lines
 - Carrier
-- Brokers
 - Claims
 - Underwriting
 - Partner Gated
@@ -74,7 +73,6 @@ tags_raw:
 - Property and Casualty
 - Commercial Lines
 - Carrier
-- Broker
 - Claims
 - Underwriting
 - Partner Gated
@@ -148,3 +146,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-tags-removed:
+- Brokers
