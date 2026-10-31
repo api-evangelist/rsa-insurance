@@ -1,4 +1,4 @@
-# RSA Insurance (rsa-insurance)
+# RSA Insurance
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,88 +64,86 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-RSA Insurance is a British property and casualty insurer whose lineage runs back to the Sun Fire Office of 1710, making it one of the oldest general insurance brands in the United Kingdom. It writes commercial lines through intermediaries — property, liability, motor fleet, marine, construction, engineering and renewable energy, cyber, professional and financial lines, rail, and accident and health — alongside a residual personal lines book. RSA Insurance Group was acquired by Intact Financial Corporation in 2021, and on 6 October 2025 RSA and NIG formally rebranded to Intact Insurance across the UK, Ireland and Europe.
+RSA Insurance is a British property and casualty insurer whose lineage runs back to the Sun Fire Office of 1710, making it one of the oldest general insurance brands in the United Kingdom. It writes commercial lines through intermediaries — property, liability, motor fleet, marine, construction, engineering and renewable energy, cyber, professional and financial lines, rail, and accident and health — alongside a residual personal lines book. RSA Insurance Group was acquired by Intact Financial Corporation in 2021, and on 6 October 2025 RSA and NIG formally rebranded to Intact Insurance across the UK, Ireland and Europe; rsainsurance.co.uk now survives as a legacy broker-tools site while corporate, investor, careers and news content has moved to intactinsurance.co.uk. RSA has no public developer portal and publishes no self-serve API. developer., developers., docs. and api. subdomains do not serve (wildcard DNS resolves but no TLS service answers), and /developers, /api, /developer, /partners, /integrations and /brokers all return HTTP 404. Every integration surface is broker-gated behind a user ID and password issued to registered intermediaries: RSA Connect (the "Connect Intermediary Website"), RSA Online for intermediated personal home and commercial trading, RSA Claims Online, an eFNOL commercial property claims form, the MID2 Motor Insurance Database portal, and the RSAred risk management customer portal. Machine-to-machine trading reaches RSA the way it reaches most UK carriers — through broker software houses (Acturis, Applied, Open GI, SSP, Bravo Digital Trader) and the Polaris imarket commercial e-trading hub, which lists Intact among its participating insurers and runs on Polaris Standards rather than an openly documented carrier API. No ACORD, AL3, ACORD XML, NGDS or IVANS reference appears anywhere on RSA's public site, and no Lloyd's PPL, Whitespace or Blueprint Two participation was found. This is a partner-gated carrier with no public API surface.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/rsa-insurance/refs/heads/main/apis.yml)
+**Areas:** Insurance · United Kingdom · Property and Casualty · Commercial Lines · Carrier · Claims · Underwriting
 
-## Tags
+## RSA Insurance on APIs.io
 
-- Insurance
-- United Kingdom
-- Property and Casualty
-- Commercial Lines
-- Carrier
-- Broker
-- Claims
-- Underwriting
-- Partner Gated
+Everything profiled for RSA Insurance is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/rsa-insurance/](https://apis.io/providers/rsa-insurance/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Security (2)
 
-**None.** RSA Insurance publishes no public, self-serve API and operates no developer portal.
+Authentication, trust centre, and vulnerability disclosure.
 
-Every developer-portal candidate was probed on 2026-07-25 and none exists. `/developers`, `/developer`, `/api`, `/partners`, `/integrations` and `/brokers` all return HTTP 404 on `www.rsainsurance.co.uk`; `developer.`, `developers.`, `docs.` and `api.` resolve to a wildcard DNS address but no TLS service answers. The successor site `intactinsurance.co.uk` is no different — the same paths 404 and the same subdomains do not serve. No OpenAPI, Swagger, AsyncAPI, GraphQL schema, `.proto` or public Postman collection was found on any RSA host, so this repository has no `openapi/` directory.
+- [Rsa Insurance Authentication](https://apis.io/security/rsa-insurance/rsa-insurance-authentication/)
+- [Rsa Insurance Domain Security](https://apis.io/security/rsa-insurance/rsa-insurance-domain-security/)
 
-### What RSA actually operates
+## Where to find this API
 
-The company's real integration surface is enumerated on its [Tools and resources](https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/) page, and every item on it is a human login:
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-| Tool | What it does | Access |
-| --- | --- | --- |
-| [RSA Connect](https://www.rsaconnect.rsagroup.co.uk/portal/UKHome.aspx) | "Connect Intermediary Website" — Claims Online, Documents Online, MID Updates | User ID + password, provisioned by email with an agency number |
-| [RSA Online](https://www.rsaonline.rsagroup.com/AWE/Container.aspx?CurrentWorkflow=Logon&CurrentStep=Login) | Online trading platform for intermediated personal home and commercial products | User ID + password, brokers only |
-| RSA Claims Online | Claim reference numbers, documents, current status | User ID + password, brokers only |
-| Commercial Property eFNOL | Electronic first notification of loss | Public HTML web form, not an API |
-| [MID2 Database](https://www.services1.rsagroup.co.uk/webappserver/midphase2public/) | Upload or change vehicle details on the Motor Insurance Database | User ID + password |
-| Business and Property Protection Portal | Risk lookup, hosted by RISCAuthority | HTTP 403 to anonymous probes |
-| RSAred | Risk management data portal | Host is now NXDOMAIN — a dead link on a live page |
+- [Website](https://www.rsainsurance.co.uk/)
+- [Documentation](https://www.rsainsurance.co.uk/brokers-and-partners/tools-resources/)
+- [Support](https://www.rsainsurance.co.uk/contact/broker-support/)
+- [Blog](https://www.intactinsurance.co.uk/news)
+- [Compliance](https://www.rsainsurance.co.uk/regulation/)
+- [Terms of service](https://www.rsainsurance.co.uk/terms-conditions/)
+- [Privacy policy](https://www.rsainsurance.co.uk/privacy-notice/)
 
-### How machines actually reach RSA
+## API Evangelist rating
 
-Through the UK's intermediated plumbing, not a carrier API. Broker software houses — Acturis, Applied, Open GI, SSP and Bravo Digital Trader — and the [Polaris imarket](https://www.polaris.co.uk/products/imarket/) commercial e-trading hub, which lists Intact among its participating insurers and integrates carriers against Polaris Standards. None of that is documented publicly by RSA, and Polaris publishes no OpenAPI either.
+**Kin Score 22.6** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-### ACORD posture
+| Facet | Score |
+|---|---|
+| Discoverability | 55.4 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 28.9 |
 
-**No ACORD reference found.** No mention of ACORD, AL3, ACORD XML, NGDS or IVANS appears anywhere on `rsainsurance.co.uk` or `intactinsurance.co.uk`. In the UK, Polaris Standards occupy the seam that ACORD occupies in North America.
+**Agent readiness 5.4** — agent-aware
 
-### London market
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-No evidence was found that RSA operates a Lloyd's syndicate or participates in PPL, Whitespace, DDM/DCOM or the Blueprint Two programme. RSA is a company-market carrier writing on its own paper. Recorded as *not found* rather than *absent* — the London market's platforms are themselves broker-gated and would not be visible from an anonymous probe.
+**Regulatory alignment 26.3** — Insurance
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/rsa-insurance/](https://apis.io/providers/rsa-insurance/).
 
-The 2026-07-25 enrichment round re-probed every host and produced the record below. Most of it is a record of *absence* — which for a partner-gated carrier is the finding, not a gap.
+## How this profile is made
 
-| Artifact | What it holds |
-| --- | --- |
-| [authentication/rsa-insurance-authentication.yml](authentication/rsa-insurance-authentication.yml) | The published access model: four human web-portal logins, provisioned by emailing an agency number. No API keys, no OAuth, no OIDC, no mTLS, no SAML metadata. |
-| [conformance/rsa-insurance-conformance.yml](conformance/rsa-insurance-conformance.yml) | Standards posture — ACORD absent, Polaris Standards *unknown* (participation implied, never stated), MID2 and ELTO genuinely conformed — plus the PRA/FCA authorisation, Solvency II SFCR, Modern Slavery and UK GDPR disclosures. No SOC 2 / ISO 27001 / PCI DSS. |
-| [lifecycle/rsa-insurance-lifecycle.yml](lifecycle/rsa-insurance-lifecycle.yml) | No API versioning, deprecation policy, SLA or status page. Records the 6 October 2025 RSA-to-Intact rebrand and the host-by-host migration of the estate. |
-| [security/rsa-insurance-domain-security.yml](security/rsa-insurance-domain-security.yml) | Probed TLS/HSTS/DNSSEC/CAA/SPF/DMARC. All three live hosts are HTTPS with HSTS; no DNSSEC and no CAA on either domain; `rsainsurance.co.uk` DMARC is `p=none` while `intactinsurance.co.uk` is `p=reject`. |
-| [well-known/rsa-insurance-well-known.yml](well-known/rsa-insurance-well-known.yml) | Every `/.well-known/` probe on every host. Nothing is served. Deliberately *not* wired as a `WellKnown` pointer — it is a negative record. |
-| [llms/rsa-insurance-llms.txt](llms/rsa-insurance-llms.txt) | Agent-facing summary telling a machine, in plain terms, that there is no API here and where the real integration seam is. |
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-No `openapi/`, `asyncapi/`, `mcp/`, `skills/`, `packages/`, `scopes/`, `errors/`, `sandbox/`, `cli/`, `changelog/` or `components/` directory exists, because there is nothing real to put in one. No first-party package exists on npm, PyPI or any other registry, and `github.com/rsagroup` is an unrelated neuroscience toolbox.
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for RSA Insurance: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### Host change found this round
+## Open an issue
 
-`www.rsaconnect.rsagroup.co.uk` now **302s to `www.connect.intactinsurance.co.uk`** — the RSA Connect intermediary portal has moved to the Intact hostname while the link on RSA's own public tools page still points at the old one. Both hosts answer HTTP 200 to *every* path, including `/openapi.json`, `/swagger.json` and `/.well-known/openid-configuration`; every one of those responses is an ASP.NET rewrite to `/ErrorPage.aspx` with the body `Security Error!.. Invalid URL or Invalid data`. They are not documents, and any future round should not mistake those 200s for a spec.
-
-## Review
-
-The full reviewer finding, including every probe URL with its HTTP status, is in [review.yml](review.yml).
-
-## Links
-
-- [RSA Insurance (legacy site)](https://www.rsainsurance.co.uk/)
-- [Intact Insurance UK (successor site)](https://www.intactinsurance.co.uk/)
-- [RSA and NIG are now Intact Insurance — FAQ](https://www.intactinsurance.co.uk/faqs/rsa-and-nig-are-now-intact-insurance)
-- [Broker support](https://www.rsainsurance.co.uk/contact/broker-support/)
-- [LinkedIn](https://www.linkedin.com/company/rsa)
-- [X](https://x.com/rsagroup)
-- [YouTube](https://www.youtube.com/rsainsurance)
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/rsa-insurance/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
